@@ -3,38 +3,46 @@
 const numValues = document.querySelectorAll(".butt");
 const operatorsVar = document.querySelectorAll(".buttOp");
 const actVar = document.querySelectorAll(".buttAct");
-
 const screen = document.querySelector(".screen");
 
-// const ac = document.querySelector(".ac");
-// const c = document.querySelector(".c");
-// const sev = document.querySelector(".sev");
-// const eig = document.querySelector(".eig");
-// const nin = document.querySelector(".nin");
-// const fou = document.querySelector(".fou");
-// const fiv = document.querySelector(".fiv");
-// const six = document.querySelector(".six");
-// const one = document.querySelector(".one");
-// const two = document.querySelector(".two");
-// const thr = document.querySelector(".thr");
-// const zer = document.querySelector(".zer");
-// const dot = document.querySelector(".dot");
-// const equalVar = document.querySelector(".equal");
-// const divideVar = document.querySelector(".divide");
-// const multiplyVar = document.querySelector(".multiply");
-// const substractVar = document.querySelector(".substract");
-// const sumVar = document.querySelector(".sum");
-
-
-
-console.log(numValues);
 
 // ACTIONS FUNCTIONS
 
 const numScreen = function(a){   
+
+    //this code section is to limit the amount of '.' a user can input, only one per 'set' of numbers
+    if (a == "."){
+        let splitVal = currentVal.split(" ");
+        let longitud = splitVal.length;
+        let secondSet = splitVal[2];
+        //longitud == 3 means we have a first set of numbers, an operand, and a second set of numbers
+        //in this case we don't want to limit the number of '.'s according to all, only 2nd set  
+        //so user can do (5.5 + 6.5), otherwise the '.' on the second set (6.5) would not be allowed
+        if (longitud == 3){
+            let checking = Array.from(secondSet);
+            for (let i = 0; i < checking.length; i++){
+                if (checking[i] == "."){
+                    return;
+                }
+            } currentVal += a;
+            screen.textContent = currentVal;   
+        //if longitud == 1 we are still adding input to the first set, in which case we limit '.'s amount to 1
+        
+        }else if(longitud == 1){
+            let checking = Array.from(currentVal);
+            for (let i = 0; i < checking.length; i++){
+                if (checking[i] == "."){
+                    return;
+                }
+            } currentVal += a;
+            screen.textContent = currentVal;   
+        }     
+    }//if user is typing '.' after an operand (for example: (5.5 + .5) it simply works once
+    else{
     currentVal += a;
     screen.textContent = currentVal;
-    // console.log(currentVal)
+}
+
 
 }
 
@@ -46,15 +54,12 @@ const actions = function(a){
             break;
         case "C":
             currentVal = currentVal.substring(0, currentVal.length-1);
-            // console.log(currentVal)
             screen.textContent = currentVal;
             break;
         case "=":  
             let sendVal = currentVal.split(" ");
-            // console.log(...sendVal);
             currentVal = operate(...sendVal);
             screen.textContent = currentVal;
-            // console.log(currentVal);
             break;
     }
 }
@@ -64,16 +69,17 @@ const operatives = function(a){
     let array = Array.from(currentVal);  //checks the array without including the initial " - " in case of neg. number
     array.shift(); //remove possible initial space separator
     array.shift(); //remove ' - ' from negative numbers
-    // console.log(array)
-    // console.log("." +currentVal+".");
+
+    //check to see if we have an operand, except negative number dash (-500 does not have an operand)
+    // if we do, we operate and update screen
     if (array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/')){
-        // console.log("WORKING")
         let sendVal = currentVal.split(" ");
         currentVal = operate(...sendVal);
         currentVal += (" " +a+ " ");
         screen.textContent = currentVal;
-    } else{
-    // console.log("NOT WORKING")
+    } 
+    //if we don't, we simply add operand with space before and after
+    else{
     currentVal += (" " +a+ " ");
     array.push(a);
     screen.textContent = currentVal;
@@ -109,12 +115,12 @@ const sum = function(inputs) {
         total +=inputs[i];
     } let checking = total.toFixed(2);              
     let checkers = checking.toString().slice(-1);
-    if (total % 1 == 0){                                     //add decimal points, only if number has decimals
+    if (total % 1 == 0){                           //add decimal points, only if number has decimals
         return total.toString();                            
-    } else if (total % 1 != 0 && checkers == 0){             //adds 1 decimal point only if the 2nd decimal point is 0
+    } else if (total % 1 != 0 && checkers == 0){   //adds 1 decimal point only if the 2nd decimal point is 0
         total = total.toFixed(1);
         return total.toString();
-    } else{                                                  //add decimal points, only if number has decimals    
+    } else{                                        //add decimal points, only if number has decimals    
     total = total.toFixed(2);                                
     return total.toString();                                 
     }
@@ -127,12 +133,12 @@ const substract = function(inputs) {
         total -=inputs[i];
     } let checking = total.toFixed(2);              
     let checkers = checking.toString().slice(-1);
-    if (total % 1 == 0){                                     //add decimal points, only if number has decimals
+    if (total % 1 == 0){                            //add decimal points, only if number has decimals
         return total.toString();                            
-    } else if (total % 1 != 0 && checkers == 0){             //adds 1 decimal point only if the 2nd decimal point is 0
+    } else if (total % 1 != 0 && checkers == 0){    //adds 1 decimal point only if the 2nd decimal point is 0
         total = total.toFixed(1);
         return total.toString();
-    } else{                                                  //add decimal points, only if number has decimals    
+    } else{                                         //add decimal points, only if number has decimals    
     total = total.toFixed(2);                                
     return total.toString();                                 
     }
@@ -145,12 +151,12 @@ const multiply = function(inputs) {
         total *= inputs[i];
     } let checking = total.toFixed(2);              
     let checkers = checking.toString().slice(-1);
-    if (total % 1 == 0){                                     //add decimal points, only if number has decimals
+    if (total % 1 == 0){                             //add decimal points, only if number has decimals
         return total.toString();                            
-    } else if (total % 1 != 0 && checkers == 0){             //adds 1 decimal point only if the 2nd decimal point is 0
+    } else if (total % 1 != 0 && checkers == 0){     //adds 1 decimal point only if the 2nd decimal point is 0
         total = total.toFixed(1);
         return total.toString();
-    } else{                                                  //add decimal points, only if number has decimals    
+    } else{                                          //add decimal points, only if number has decimals    
     total = total.toFixed(2);                                
     return total.toString();                                 
     }
@@ -160,7 +166,7 @@ const multiply = function(inputs) {
 const divide = function(inputs) {
     let total = inputs[0]
     if (inputs[1] == 0){
-        total = "can't divide by 0 goof"; //snarky message if user tries to divide by 0
+        total = "can't divide by 0 goof";            //snarky message if user tries to divide by 0
         return total;
     }else{
 
@@ -169,12 +175,12 @@ const divide = function(inputs) {
     } 
     let checking = total.toFixed(2);              
     let checkers = checking.toString().slice(-1);
-    if (total % 1 == 0){                                     //add decimal points, only if number has decimals
+    if (total % 1 == 0){                             //add decimal points, only if number has decimals
         return total.toString();                            
-    } else if (total % 1 != 0 && checkers == 0){             //adds 1 decimal point only if the 2nd decimal point is 0
+    } else if (total % 1 != 0 && checkers == 0){     //adds 1 decimal point only if the 2nd decimal point is 0
         total = total.toFixed(1);
         return total.toString();
-    } else{                                                  //add decimal points, only if number has decimals    
+    } else{                                          //add decimal points, only if number has decimals    
     total = total.toFixed(2);                                
     return total.toString();                                 
     }
@@ -182,7 +188,7 @@ const divide = function(inputs) {
 
 };
 
-//OPERATE
+//OPERATE FUNCTION
 const operate = function(num1, operator, num2){
     let nums = [parseFloat(num1), parseFloat(num2)];
     let result = undefined;
@@ -203,7 +209,7 @@ const operate = function(num1, operator, num2){
 }
 
   //TESTING
-  let teston = [5.3, "+", 5];
-  let test = operate(...teston);
+//   let teston = [5.3, "+", 5];
+//   let test = operate(...teston);
 
-  console.log(test);
+//   console.log(test);
