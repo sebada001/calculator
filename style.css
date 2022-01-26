@@ -89,6 +89,32 @@ body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 5px;
 } 
+
+.buttOp{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 20px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 5px;
+} 
+
+.buttAct{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 20px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 5px;
+}
+
+
   
   /* FIRST ROW */
   .ac {
@@ -103,91 +129,86 @@ body{
   
   .divide {
     grid-area: div;
-    background-color: rgb(141, 141, 185);
+    background-color: rgb(189, 189, 224);
   }
   
   /* SECOND ROW */
   .sev {
     grid-area: se;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .eig {
     grid-area: ei;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .nin {
     grid-area: ni;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .multiply {
     grid-area: mul;
-    background-color: rgb(141, 141, 185);
+    background-color: rgb(189, 189, 224);
   }
   
   /* THIRD ROW */
   
   .fou {
     grid-area: fo;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .fiv {
     grid-area: fi;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .six {
     grid-area: si;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .substract {
     grid-area: subs;
-    background-color: rgb(141, 141, 185);
+    background-color: rgb(189, 189, 224);
   }
   
   /* FOURTH ROW */
   .one {
     grid-area: on;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .two {
     grid-area: tw;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .thr {
     grid-area: tr;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .sum {
     grid-area: sum;
-    background-color: rgb(141, 141, 185);
+    background-color: rgb(189, 189, 224);
   }
   
   /* FIFTH ROW */
   
   .zer {
     grid-area: ze;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .dot {
     grid-area: do;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
   
   .equal {
     grid-area: eq;
-    background-color: rgb(82, 92, 82);
+    background-color: rgb(160, 197, 160);
   }
-
-
-
-
-
