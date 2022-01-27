@@ -13,6 +13,36 @@ numValues.forEach (button => button.addEventListener('click', () => {
     numScreen(button.textContent);
 }))
 
+document.addEventListener('keydown', (e) => {
+    let library = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+    let acts = ["Equal", "Backspace", "Enter"];
+    let ops = ["NumpadAdd", "NumpadSubstract", "NumpadDivide", "NumpadMultiply"];
+
+    if (library.includes(e.key)){
+        numScreen(e.key);
+    } else if (acts.includes(e.code)){
+        if (e.code == "Enter"){
+            actions("AC");
+        } else if (e.code == "Backspace"){
+            actions("C");
+        } else if (e.code == "Equal"){
+            actions("=");
+        }
+    } else if (ops.includes(e.code)){
+        if (e.code == "NumpadAdd"){
+            operatives("+");
+        } else if (e.code == "NumpadSubstract"){
+            operatives("-");
+        } else if (e.code == "NumpadDivide"){
+            operatives("/");
+        } else if (e.code == "NumpadMultiply"){
+            operatives("*");
+        }
+    } return;
+    
+
+})
+
 actVar.forEach (button => button.addEventListener('click', () => {
     actions(button.textContent);
 }))
@@ -113,7 +143,6 @@ const actions = function(a){
             else{
             result = operate(...checker);
             if (result == "can't divide by 0 goof"){
-                console.log('workaholic');
                 screen.textContent = result;
                 currentVal = "";
                 break;
@@ -126,7 +155,7 @@ const actions = function(a){
     }
 }
 
-// OPERATIVES FUNCTIONS TO ADD "+ / - *"
+// OPERATIVES FUNCTIONS TO ADD "+ / - *" TO SCREEN
 const operatives = function(a){
 
     // if no numbers inserted, you can't insert an operator
@@ -134,31 +163,43 @@ const operatives = function(a){
     // this prevent double operator, ie: (5 + 5 - - 5)
     let array = Array.from(currentVal);  
     if (array.length < 1 || array[array.length-1] == " " ){
-        return
-    } else{
+        return;
+    } 
+    else{
     array.shift(); //remove possible initial space separator
     array.shift(); //remove ' - ' from negative numbers
+    }
+    
 
 
     //check to see if we have an operand, except negative number dash (-500 does not have an operand)
     // if we do, we operate and update screen
     if (array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/')){
-        console.log("not working 1")
+       
+
         let sendVal = currentVal.split(" ");
         currentVal = operate(...sendVal);
-        currentVal += (" " +a+ " ");
         screen.textContent = currentVal;
-    } else if((array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/'))){
-        console.log("working");
-        return;
+        if (screen.textContent == "can't divide by 0 goof"){
+            currentVal = "";
+            return;
+        } else{
+        currentVal += (" " +a+ " ");
+
     }
+
+
+    } else if((array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/'))){
+        return;
+    } 
     //if we don't, we simply add operand with space before and after
     else{
     currentVal += (" " +a+ " ");
     array.push(a);
     screen.textContent = currentVal;
+// }
     }}
-}
+
 
 //////////////////////////////// OPERATION FUNCTIONS ////////////////////////////////
 
@@ -221,6 +262,7 @@ const divide = function(inputs) {
     let total = inputs[0]
     if (inputs[1] == 0){
         total = "can't divide by 0 goof";            //snarky message if user tries to divide by 0
+        console.log("goof")
         return total;
     }else{
 
