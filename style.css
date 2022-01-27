@@ -108,6 +108,16 @@ body{
     background-color:var(--color-5)
 } 
 
+.butt:hover{
+  background-color: var(--color-2);
+}
+
+.butt:active {
+  background-color: var(--color-5);
+  box-shadow: 0 3px var(--dark-color-1);
+  transform: translateY(4px);
+}
+
 .buttOp{
   width: 100%;
   height: 100%;
@@ -121,6 +131,16 @@ body{
   background-color: var(--color-4);
 } 
 
+.buttOp:hover{
+  background-color: var(--color-2);
+}
+
+.buttOp:active {
+  background-color: var(--color-4);
+  box-shadow: 0 3px var(--dark-color-1);
+  transform: translateY(4px);
+}
+
 .buttAct{
   width: 100%;
   height: 100%;
@@ -132,6 +152,15 @@ body{
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-radius: 5px;
   background-color: var(--color-1);
+}
+.buttAct:hover{
+  background-color: var(--color-2);
+}
+
+.buttAct:active {
+  background-color: var(--color-1);
+  box-shadow: 0 3px var(--dark-color-1);
+  transform: translateY(4px);
 }
 
 

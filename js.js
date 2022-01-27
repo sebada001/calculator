@@ -135,8 +135,13 @@ const actions = function(a){
             //check if number is alone by itself, can't do a = operator to a single number
             else if (checker.length < 2 ){
                 currentVal = currentVal;
+                console.log(currentVal.length)
+                if (currentVal.length > 17){
+                    screen.textContent = "number too large";
+                }else{
                 screen.textContent = currentVal;
                 break;
+            }
             } 
             
             //if restrictions above are not met, operate
@@ -148,9 +153,15 @@ const actions = function(a){
                 break;
             }else{
             currentVal = result;
+            if (currentVal.length > 16){
+                screen.textContent = "number too large";
+                currentVal = "";
+                break;
+            }else{
             screen.textContent = currentVal;
+            // console.log(currentVal.length);
             break;
-        }
+        }}
         }
     }
 }
@@ -179,14 +190,20 @@ const operatives = function(a){
 
         let sendVal = currentVal.split(" ");
         currentVal = operate(...sendVal);
+        if (currentVal.length > 16){
+            screen.textContent = "number too large";
+            currentVal = "";
+            console.log('aha')
+        }else{
         screen.textContent = currentVal;
         if (screen.textContent == "can't divide by 0 goof"){
             currentVal = "";
             return;
         } else{
         currentVal += (" " +a+ " ");
+        screen.textContent = currentVal;
 
-    }
+    }}
 
 
     } else if((array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/'))){
