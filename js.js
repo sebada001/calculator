@@ -5,8 +5,46 @@ const operatorsVar = document.querySelectorAll(".buttOp");
 const actVar = document.querySelectorAll(".buttAct");
 const screen = document.querySelector(".screen");
 
+// STORE VALUES
+let currentVal = "";
 
-// ACTIONS FUNCTIONS
+// EVENT LISTENERS
+numValues.forEach (button => button.addEventListener('click', () => {
+    numScreen(button.textContent);
+}))
+
+actVar.forEach (button => button.addEventListener('click', () => {
+    actions(button.textContent);
+}))
+
+operatorsVar.forEach (button => button.addEventListener('click', () => {
+    operatives(button.textContent);
+}))
+
+
+//////////////////////////////// FUNCTIONS TRIGGERS ////////////////////////////////
+
+//OPERATE FUNCTION
+const operate = function(num1, operator, num2){
+    let nums = [parseFloat(num1), parseFloat(num2)];
+    let result = undefined;
+    switch(operator){
+        case "+":
+            result = sum(nums);
+            return result;
+        case "-":
+            result = substract(nums);
+            return result;
+        case "/":
+            result = divide(nums);        
+            return result;            
+        case "*":
+            result = multiply(nums);
+            return result;
+    }
+}
+
+//NUMSCREEN FUNCTION, ADDS NUMBERS AND '.' TO SCREEN
 
 const numScreen = function(a){   
 
@@ -41,11 +79,9 @@ const numScreen = function(a){
     else{
     currentVal += a;
     screen.textContent = currentVal;
-}
+}}
 
-
-}
-
+// ACTION FUNCTIONS TRIGGERS LIKE CLEAR, DELETE AND OPERATE
 const actions = function(a){
     switch(a){
         case "AC":
@@ -56,57 +92,75 @@ const actions = function(a){
             currentVal = currentVal.substring(0, currentVal.length-1);
             screen.textContent = currentVal;
             break;
-        case "=":  
-            let sendVal = currentVal.split(" ");
-            currentVal = operate(...sendVal);
+        case "=":
+            //declare arrays needed to check statements below
+            let array = Array.from(currentVal); 
+            let checker = currentVal.split(" ");
+
+            //check if last value is empty/space string, meaning = is coming right after an operator
+            if (array[array.length-1] == " " ){
+                break;
+            } 
+            
+            //check if number is alone by itself, can't do a = operator to a single number
+            else if (checker.length < 2 ){
+                currentVal = currentVal;
+                screen.textContent = currentVal;
+                break;
+            } 
+            
+            //if restrictions above are not met, operate
+            else{
+            result = operate(...checker);
+            if (result == "can't divide by 0 goof"){
+                console.log('workaholic');
+                screen.textContent = result;
+                currentVal = "";
+                break;
+            }else{
+            currentVal = result;
             screen.textContent = currentVal;
             break;
+        }
+        }
     }
 }
 
+// OPERATIVES FUNCTIONS TO ADD "+ / - *"
 const operatives = function(a){
-      
-    let array = Array.from(currentVal);  //checks the array without including the initial " - " in case of neg. number
+
+    // if no numbers inserted, you can't insert an operator
+    // if the last value is an empty string (empty strings get added when you add an operator), you can't insert an operator
+    // this prevent double operator, ie: (5 + 5 - - 5)
+    let array = Array.from(currentVal);  
+    if (array.length < 1 || array[array.length-1] == " " ){
+        return
+    } else{
     array.shift(); //remove possible initial space separator
     array.shift(); //remove ' - ' from negative numbers
+
 
     //check to see if we have an operand, except negative number dash (-500 does not have an operand)
     // if we do, we operate and update screen
     if (array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/')){
+        console.log("not working 1")
         let sendVal = currentVal.split(" ");
         currentVal = operate(...sendVal);
         currentVal += (" " +a+ " ");
         screen.textContent = currentVal;
-    } 
+    } else if((array.includes("+") || array.includes('-') || array.includes('*') || array.includes('/'))){
+        console.log("working");
+        return;
+    }
     //if we don't, we simply add operand with space before and after
     else{
     currentVal += (" " +a+ " ");
     array.push(a);
     screen.textContent = currentVal;
-    }
-
+    }}
 }
 
-// // EVENT LISTENERS
-
-numValues.forEach (button => button.addEventListener('click', () => {
-    numScreen(button.textContent);
-}))
-
-actVar.forEach (button => button.addEventListener('click', () => {
-    actions(button.textContent);
-}))
-
-operatorsVar.forEach (button => button.addEventListener('click', () => {
-    operatives(button.textContent);
-}))
-
-
-// STORE VALUES
-
-let currentVal = "";
-// let screenVal = "";
-
+//////////////////////////////// OPERATION FUNCTIONS ////////////////////////////////
 
 // SUM
 const sum = function(inputs) {
@@ -184,32 +238,4 @@ const divide = function(inputs) {
     total = total.toFixed(2);                                
     return total.toString();                                 
     }
-} 
-
-};
-
-//OPERATE FUNCTION
-const operate = function(num1, operator, num2){
-    let nums = [parseFloat(num1), parseFloat(num2)];
-    let result = undefined;
-    switch(operator){
-        case "+":
-            result = sum(nums);
-            return result;
-        case "-":
-            result = substract(nums);
-            return result;
-        case "/":
-            result = divide(nums);
-            return result;
-        case "*":
-            result = multiply(nums);
-            return result;
-    }
-}
-
-  //TESTING
-//   let teston = [5.3, "+", 5];
-//   let test = operate(...teston);
-
-//   console.log(test);
+} };

@@ -9,8 +9,8 @@
   --color-3: rgb(181, 181, 212);
   --color-4: rgb(134, 195, 235);
   --color-5: rgb(231, 224, 182);
-  --dark-color-1:rgb(35, 49, 54);
-  --dark-color-2:rgb(20, 21, 39);
+  --dark-color-1:rgba(35, 49, 54, 0.836);
+  --dark-color-2:rgba(235, 138, 81, 0.884);
 
 }
 
@@ -20,8 +20,11 @@ body{
     height: 100vh;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-color-2)
+    background-image: radial-gradient( var(--dark-color-2) 5%, var(--dark-color-2) 40%, var(--dark-color-1)100%);
+    filter: sepia(50%);
 }
+
+
 
 .container{
     width: 400px;
@@ -31,8 +34,10 @@ body{
     align-items: center;
     justify-self: center;
     border: 0.7em solid var(--dark-color-1);
-    border-radius: 1.4em;
+    border-radius: 2em;
     flex-direction: column;
+    box-shadow: 0px 0px 10px var(--dark-color-1);
+    
 
 }
 
@@ -43,12 +48,12 @@ body{
     align-self: flex-start;
     font-size: 22px;
     font-weight: 600;
-    color: var(--dark-color-2);
+    color: var(--dark-color-1);
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .screen{
-    background-color: var(--color-2);
+    background-color: var(--dark-color-1);
     width: 80%;
     height: 20%;
     /* box-shadow: rgba(5, 17, 17, 0.9) 0px 1px 8px; */
@@ -64,7 +69,9 @@ body{
     font-size: 30px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 5px;
-    color: var(--dark-color-1);
+    color: var(--dark-color-2);
+    filter: saturate(200%);
+
 }
 
 .buttons {
